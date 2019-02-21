@@ -250,6 +250,13 @@
                     key = Bridge.Class.getCachedType(fn, arguments);
 
                     if (key) {
+                        if (key.type.$staticInit) {
+                            var oldStaticInitAllow = Bridge.Class.staticInitAllow;
+                            Bridge.Class.staticInitAllow = true;
+                            key.type.$staticInit();
+                            Bridge.Class.staticInitAllow = oldStaticInitAllow;
+                        }
+
                         return key.type;
                     }
 
